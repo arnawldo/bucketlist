@@ -1,0 +1,28 @@
+.login-container {
+    max-width: 300px;
+    margin: 0 auto;
+    margin-top: 10%;
+    padding: 10px;
+    border: 1px solid #E4CECE;
+    background: #F6DEDE;
+    border-radius: 5px;
+}
+
+.task-container {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 5%;
+    padding: 10px;
+    border: 1px solid #E4CECE;
+    background: #F6DEDE;
+    border-radius: 5px;
+}
+
+.home-container {
+	max-width: 800px;
+
+}
+
+body {
+    background-color: #bbb;
+}
