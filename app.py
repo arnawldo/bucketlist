@@ -86,12 +86,15 @@ def create_bucket():
             return redirect(url_for("login"))
     return render_template("create_bucket.html", form=form)
 
+
+
 @app.route('/delete_bucket/<string:bucket_name>')
 @requires_login
 def delete_bucket(bucket_name):
     user = db.find_user_by_email(session["email"])
-    user.d
-    return redirect(url_for('users.user_alerts'))
+    user.delete_bucket(bucket_name)
+    return redirect(url_for('buckets'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

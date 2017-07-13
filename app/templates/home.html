@@ -3,10 +3,16 @@
 
 
 {% block content %}
+<div class="container">
     <div class="jumbotron">
         <h1>BUCKET LIST</h1>
         <p>Let's plan for the future!</p>
         <p>Just sign up, and get started!</p>
-        <p><a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Get started</a></p>
+        {% if session['email'] %}
+            <p><a class="btn btn-primary btn-lg" href="{{ url_for('buckets') }}" role="button">Get started</a></p>
+        {% else %}
+            <p><a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Get started</a></p>
+        {% endif %}
     </div>
+</div>
 {% endblock %}

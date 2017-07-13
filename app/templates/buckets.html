@@ -2,7 +2,7 @@
 
 
 {% block content %}
-
+<div class="container" style="width: 50%">
         {% if user.buckets|length == 0 %}
 
             <div class="jumbotron">
@@ -12,26 +12,19 @@
 
         {% else %}
 
-            <div class="row">
-            <div class="col-sm-4">
-            <!--Buckets-->
-            <div class="single category">
-                <h3 class="side-title">Buckets</h3>
-                <ul class="list-unstyled">
+            <ul class="list-group">
+                {% for bucket in user.buckets %}
 
-                    {% for bucket in user.buckets %}
+                <li class="list-group-item">{{ bucket.bucket_name }}<button type="button" class="btn btn-danger pull-right"><a href="{{ url_for('delete_bucket', bucket_name=bucket.bucket_name)}}" style="color:white">Delete</a></button></li>
 
-                        <li><a href="#" title="">{{ bucket.bucket_name }} <span class="pull-right">Button Here</span></a></li>
+                {% endfor %}
+            </ul>
 
-                    {% endfor %}
-
-                </ul>
-            </div>
+            <div>
                 <p><a class="btn btn-primary btn-lg" href="{{ url_for('create_bucket') }}" role="button">New bucket</a></p>
-            </div>
             </div>
 
         {% endif %}
 
-
+</div>
 {% endblock %}
