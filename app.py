@@ -73,21 +73,25 @@ def buckets():
     return render_template("buckets.html", user=user)
 
 @app.route('/create_bucket', methods=["GET", "POST"])
+@requires_login
 def create_bucket():
     form = NewBucketForm()
     if form.validate_on_submit():
         user = db.find_user_by_email(session["email"])
-        user.create_bucket_list(form.name.data, form.description.data)
-        return redirect(url_for("buckets"))
-    user = db.find_user_by_email(session["email"])
+        if user:
+            user.create_bucket_list(form.name.data, form.description.data)
+            return redirect(url_for("buckets"))
+        else:
+            flash("You need to log in first")
+            return redirect(url_for("login"))
     return render_template("create_bucket.html", form=form)
 
-# @app.route('/delete/<string:alert_id>')
-# @requires_login
-# def delete_bucket(bucket_name):
-#     user = db.find_user_by_email(session["email"])
-#     user.d
-#     return redirect(url_for('users.user_alerts'))
+@app.route('/delete_bucket/<string:bucket_name>')
+@requires_login
+def delete_bucket(bucket_name):
+    user = db.find_user_by_email(session["email"])
+    user.d
+    return redirect(url_for('users.user_alerts'))
 
 if __name__ == '__main__':
     app.run(debug=True)
