@@ -1,16 +1,46 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Flasky - Login{% endblock %}
+{% block title %}Bucketlist - Login{% endblock %}
 
+{% block head %}
+{{ super() }}
+
+<style>
+
+body {
+    background-color: rgba(28, 184, 230, 0.68);
+}
+
+.form-box {
+    width: 50%;
+    margin: auto;
+    padding-top:20px;
+}
+
+.form-box h1 {
+    text-align: center;
+    font-weight: bold;
+    color: #f3fdff;
+}
+
+.form-box h1 span {
+    font-weight: lighter;
+}
+
+</style>
+
+{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Login</h1>
-</div>
-<div class="col-md-4">
-    {{ wtf.quick_form(form) }}
+<div class="container">
+    <div class="row">
+        <div class="form-box">
+            <h1>Login</h1>
+            {{ wtf.quick_form(form) }}
     <br>
-    <p>New user? <a href="{{ url_for('register') }}">Click here to register</a>.</p>
-</div>
+    <p style="color:#fff">New user? <a href="{{ url_for('register') }}" style="color:#fff">Click here to register</a>.</p>
+
+        </div>
+    </div>
 {% endblock %}
