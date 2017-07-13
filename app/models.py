@@ -1,20 +1,19 @@
-from src.exceptions import UserAlreadyExistsError, BucketListAlreadyExistsError
-from passlib.hash import pbkdf2_sha512
-from src.exceptions import UserNotExistsError, IncorrectPasswordError
+
 import re
+
+from app.exceptions import UserNotExistsError, IncorrectPasswordError, UserAlreadyExistsError
 
 
 class Database(object):
     """Class for temporary storage of instances of User, BucketList, and Task"""
 
-    # store for users, bucket lists, and tasks
-    users = []
-    bucket_lists = []
-    tasks= []
+    def __init__(self):
+
+        # store for users, bucket lists, and tasks
+        self.users = []
 
 
-    @staticmethod
-    def insert_user(user):
+    def insert_user(self, user):
         """
         Insert user instance into database
 
@@ -24,15 +23,14 @@ class Database(object):
         :rtype: bool
         """
         # check if similar user already exists
-        for db_user in Database.users:
-            if user.username == db_user.username or user.email == db_user.email:
+        for db_user in self.users:
+            if user.email == db_user.email:
                 raise UserAlreadyExistsError("User already exists!")
         # register user
-        Database.users.append(user)
+        self.users.append(user)
         return True
 
-    @staticmethod
-    def find_user_by_email(email):
+    def find_user_by_email(self, email):
         """
         Searches for a user by given email
 
@@ -40,12 +38,31 @@ class Database(object):
         :type attr: str
         :return: User instance with given email, else None if not found
         """
-        for user in Database.users:
+        for user in self.users:
             if user.email == email:
                 return user
 
         # user not found
-        return None
+        return False
+
+    def verify_login_credentials(self, email, password):
+        """
+        Verify if email and password entered by user are authentic
+
+        :param email: The user's email
+        :param password: A sha512 hashed password
+        :return: True if valid, False otherwise
+        """
+
+        user = self.find_user_by_email(email)
+
+        if user:
+            if user.password == password:
+                return True
+            return False
+        # no user was found
+        raise UserNotExistsError
+
 
 
 class Utils(object):
@@ -79,18 +96,15 @@ class Utils(object):
 class BucketList(object):
     """Class of user bucket lists"""
 
-    def __init__(self, username, bucket_name, description=None):
+    def __init__(self, bucket_name, description=None):
         """
         Instantiate BucketList object
 
-        :param username: Username of bucket owner
-        :type username: str
         :param bucket_name: Name of the bucket list
         :type bucket_name: str
         :param description: optional description of bucket list
         :type description: str
         """
-        self.username = username
         self.bucket_name = bucket_name
         self.description = description
         self.tasks = [] # store for to-do tasks
@@ -135,8 +149,7 @@ class Task(object):
 class User(object):
     """Class for the app users"""
 
-    def __init__(self, username, email, password):
-        self.username = username
+    def __init__(self, email, password):
         self.email = email
         self.password = password
         self.buckets = []
@@ -150,35 +163,42 @@ class User(object):
         :param description: Description of bucket list
         :return: True if bucket list was successfully created, False otherwise
         """
-        bucket = BucketList(self.username, bucket_name, description)
+        bucket = BucketList(bucket_name, description)
         self.buckets.append(bucket)
 
-
-    @staticmethod
-    def verify_login_credentials(username_or_email, password):
+    def delete_bucket(self, bucket_name):
         """
-        Verify if username/email and password entered by user are authentic
+        Delete a bucket list
 
-        :param username_or_email: The user's username or email
-        :param password: A sha512 hashed password
-        :return: True if valid, False otherwise
+        :param bucket_name: Name of bucket list to be deleted
+        :return: True if bucket list was successfully deleted, False otherwise
         """
-        # regular expression for matching emails
-        email_regex_matcher = re.compile(r"[^@]+@[^@]+\.[^@]+")
-
-        if email_regex_matcher.match(username_or_email):
-            # find user by email
-            user = Database.find_user(attr=username_or_email, by="email")
+        pos = None
+        for i, bucket in enumerate(self.buckets):
+            if bucket.bucket_name == bucket_name:
+                pos = i
+        if pos is not None:
+            del self.buckets[pos]
+            return True
         else:
-            # find user by username
-            user = Database.find_user(attr=username_or_email, by="username")
-        if user is None:
-            # no user was found
-            raise UserNotExistsError
-        elif Utils.check_hashed_password(password=password, hashed_password=user.password):
-            raise IncorrectPasswordError
+            return False
 
-        return True
+    # def update_bucket(self, bucket_name, bu):
+    #     """
+    #     Update a bucket list
+    #
+    #     :param bucket_name: Name of bucket list to be updated
+    #     :return: True if bucket list was successfully updated, False otherwise
+    #     """
+    #     pos = None
+    #     for i, bucket in enumerate(self.buckets):
+    #         if bucket.bucket_name == bucket_name:
+    #             pos = i
+    #     if pos is not None:
+
+
+
+
 
 
     def __repr__(self):

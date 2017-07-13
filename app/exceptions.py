@@ -4,30 +4,30 @@ class BucketListAppErrors(Exception):
     def __init__(self, message):
         self.message = message
 
-class UserAlreadyExistsError(BucketListAppErrors):
+class UserAlreadyExistsError(Exception):
     pass
 
-class BucketListAlreadyExistsError(BucketListAppErrors):
-    pass
-
-
-class UserError(BucketListAppErrors):
+class BucketListAlreadyExistsError(Exception):
     pass
 
 
-class UserNotExistsError(UserError):
+class UserError(Exception):
     pass
 
 
-class IncorrectPasswordError(UserError):
+class UserNotExistsError(Exception):
     pass
 
 
-class UserAlreadyRegisteredError(UserError):
+class IncorrectPasswordError(Exception):
     pass
 
 
-class InvalidEmailError(UserError):
+class UserAlreadyRegisteredError(Exception):
+    pass
+
+
+class InvalidEmailError(Exception):
     pass
 
 class ValidationError(ValueError):

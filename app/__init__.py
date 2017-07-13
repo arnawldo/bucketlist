@@ -14,7 +14,4 @@ def create_app(config_name):
 
     bootstrap.init_app(app)
 
-    from app.views import bucket_app
-    app.register_blueprint(bucket_app)
-
     return app
