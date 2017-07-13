@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% block title %}Bucketlist Home{% endblock %}
 
-{% block page_content %}
-<div class="page-header">
-    <h1>Home</h1>
-</div>
+
+{% block content %}
+    <div class="jumbotron">
+        <h1>BUCKET LIST</h1>
+        <p>Let's plan for the future!</p>
+        <p>Just sign up, and get started!</p>
+        <p><a class="btn btn-primary btn-lg" href="{{ url_for('register') }}" role="button">Get started</a></p>
+    </div>
 {% endblock %}
