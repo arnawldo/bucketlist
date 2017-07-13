@@ -1,3 +1,4 @@
 flask-bootstrap
 flask-script
 flask-wtf
+pytest-flask
