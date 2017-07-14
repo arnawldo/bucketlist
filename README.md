@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/arnawldo/bucketlist.svg?branch=master)](https://travis-ci.org/arnawldo/bucketlist)
 [![Coverage Status](https://coveralls.io/repos/github/arnawldo/bucketlist/badge.svg?branch=master)](https://coveralls.io/github/arnawldo/bucketlist?branch=master)  
+
 # BUCKETLIST
 This is a web application that  allows users to record and share things they want to achieve or experience before reaching a certain age keeping track of their dreams and goals.  
 It allows users to register an account and create a bucket list.  
