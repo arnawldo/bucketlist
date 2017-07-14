@@ -33,8 +33,9 @@ h2 {
                 <thead>
                   <tr>
                       <th class="col-md-3">{{ bucket.name }}</th>
-                      <a href="{{ url_for('edit_bucket', bucket_name=bucket.bucket_name) }}"><span class="glyphicon glyphicon-pencil" style="float: left"></span></a>
-                      <a href="{{ url_for('delete_bucket', bucket_name=bucket.bucket_name) }}"><span class="glyphicon glyphicon-remove" style="float: left"></span></a>
+
+                      <a href="{{ url_for('edit_bucket', bucket_name=bucket.bucket_name) }}"><span style="width:50px" class="glyphicon glyphicon-pencil" ></span></a>
+                      <a href="{{ url_for('delete_bucket', bucket_name=bucket.bucket_name) }}"><span class="glyphicon glyphicon-remove" ></span></a>
                   </tr>
                 </thead>
                 <tbody>

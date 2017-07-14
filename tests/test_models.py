@@ -1,18 +1,18 @@
 import pytest
-from flask import url_for
 
 from app import create_app
+from app.models import User, Database
 
 
 @pytest.fixture
-def app():
-    app = create_app("default")
-    return app
+def user_client():
+    return User("test@test.com", "test")
+
 
 @pytest.fixture
-def test_client(app):
-    return app.test_client()
+def db_client():
+    return Database()
 
-
-def test_app(client):
-    assert True
+def test__user_can_register__succeeds(user_client, db_client):
+    db_client.insert_user(user_client)
+    assert len(db_client.users) > 0

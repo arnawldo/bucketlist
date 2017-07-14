@@ -2,3 +2,4 @@ flask-bootstrap
 flask-script
 flask-wtf
 pytest-flask
+pytest-cov>=2.1.0
