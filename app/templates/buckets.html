@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block head %}
+{{ super() }}
+
+<style>
+
+h2 {
+    font-family: "Anonymice Powerline";
+    color: #ffec00;
+}
+</style>
+
+{% endblock %}
+{% block content %}
+
+<div class="container" >
+        {% if user.buckets|length == 0 %}
+
+            <div class="jumbotron">
+                <h3>Looks like you dont have any buckets...Let's change that!</h3>
+                <p><a class="btn btn-primary btn-lg" href="{{ url_for('create_bucket') }}" role="button">Create a bucket</a></p>
+            </div>
+
+        {% else %}
+
+
+            {% for bucket in user.buckets %}
+
+            <h2>{{ bucket.bucket_name }}</h2>
+
+                <table>
+                <thead>
+                  <tr>
+                      <th class="col-md-3">{{ bucket.name }}</th>
+
+                      <a href="{{ url_for('edit_bucket', bucket_name=bucket.bucket_name) }}"><span style="width:50px" class="glyphicon glyphicon-pencil" ></span></a>
+                      <a href="{{ url_for('delete_bucket', bucket_name=bucket.bucket_name) }}"><span class="glyphicon glyphicon-remove" ></span></a>
+                  </tr>
+                </thead>
+                <tbody>
+
+                {% for task in bucket.tasks %}
+                    <tr><td>{{ task.name }}</td></tr>
+                {% endfor %}
+
+                </tbody>
+                </table>
+
+
+        <hr>
+            {% endfor %}
+
+
+
+
+    <div class="container" style="padding-top: 50px;">
+        <p><a class="btn btn-primary btn-lg" href="{{ url_for('create_bucket') }}" role="button">New bucket</a></p>
+    </div>
+
+        {% endif %}
+
+</div>
+{% endblock %}

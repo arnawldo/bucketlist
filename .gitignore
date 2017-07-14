@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/bucketlist.iml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+venv/
+__pycache__/
+.cache/
+.eggs/
+app.egg-info/
+app/static/back.png
+bucketlist.egg-info/

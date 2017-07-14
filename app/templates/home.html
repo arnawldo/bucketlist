@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Bucketlist Home{% endblock %}
+
+{% block head %}
+{{ super() }}
+
+<style>
+    body {
+        background-image: url("static/home.jpg");
+
+    }
+    .title-div {
+        background-color: rgba(255,255,255, 0.6);
+        padding: 3%;
+        border-radius: 2%;
+        font-family: 'Consolas', 'Monaco', 'Bitstream Vera Sans Mono', monospace;
+        text-align: center;
+    }
+
+</style>
+
+{% endblock %}
+
+{% block content %}
+<div class="container"  >
+    <div >
+        <div class="title-div">
+        <h1 class="home-title" style="font: 400 100px/1.5 'Pacifico', Helvetica, sans-serif; color: #2b2b2b; text-shadow: 3px 3px 0px rgba(0,0,0,0.1), 7px 7px 0px rgba(0,0,0,0.05);">
+            BUCKET LIST
+        </h1>
+        <p>Let's plan for the future! Just sign up, and get started!</p>
+        {% if session['email'] %}
+            <p><a class="btn btn-success" href="{{ url_for('buckets') }}" role="button">Get started</a></p>
+        {% else %}
+            <p><a class="btn btn-success" href="{{ url_for('register') }}" role="button">Get started</a></p>
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
