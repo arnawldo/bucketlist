@@ -12,4 +12,15 @@ Technology stack: Python(Flask, Jinja2), HTML/CSS/Bootstrap
 `pip install -r requirements.txt`
 4. Run the application with  
 `python app.py`  
+  
+![buckets](readme-files/buckets.png)   
 
+![buckets tasks](readme-files/bucket_tasks.png)
+  
+![craete buckets](readme-files/create-bucket.png)
+  
+![home_page](readme-files/home_page.png)
+  
+![login](readme-files/login.png)
+
+![register](readme-files/register.png)
