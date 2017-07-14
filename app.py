@@ -4,7 +4,7 @@ from flask import render_template, Blueprint, request, session, redirect, url_fo
 
 from app.decorators import requires_login
 from app.exceptions import UserNotExistsError, IncorrectPasswordError, UserAlreadyExistsError
-from app.forms import LoginForm, RegistrationForm, NewBucketForm
+from app.forms import LoginForm, RegistrationForm, NewBucketForm, NewTaskForm
 from app.models import User, Database, BucketList
 
 from app.models import Database
@@ -85,6 +85,26 @@ def create_bucket():
             flash("You need to log in first")
             return redirect(url_for("login"))
     return render_template("create_bucket.html", form=form)
+
+@app.route('/edit_bucket/<string:bucket_name>', methods=["GET", "POST"])
+@requires_login
+def edit_bucket(bucket_name):
+    form = NewTaskForm()
+    user = db.find_user_by_email(session["email"])
+
+    if form.validate_on_submit():
+        if user:
+            bucket = user.find_bucket(bucket_name)
+            if bucket:
+                bucket.create_task(form.description.data)
+                return redirect(url_for("buckets"))
+            flash("Bucket not found")
+        else:
+            flash("You need to log in first")
+            return redirect(url_for("login"))
+
+    bucket = user.find_bucket(bucket_name)
+    return render_template("edit_bucket.html", form=form, bucket=bucket)
 
 
 
