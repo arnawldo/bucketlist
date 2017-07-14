@@ -1,4 +1,4 @@
-
+from passlib.hash import pbkdf2_sha512
 import re
 
 from app.exceptions import UserNotExistsError, IncorrectPasswordError, UserAlreadyExistsError
