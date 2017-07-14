@@ -12,8 +12,11 @@ Technology stack: Python(Flask, Jinja2), HTML/CSS/Bootstrap
 `run virtualenv --python=python3.5 venv`
 3. Install package requirements with    
 `pip install -r requirements.txt`
+`pip install -r test_requirements.txt`  
 4. Run the application with  
 `python app.py`  
+5. Run tests with  
+`python setup.py test`
   
 ![buckets](readme-files/buckets.png)   
 
