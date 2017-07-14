@@ -72,6 +72,25 @@ td:last-child {
   color: #dc2a2a;
 }
 
+tr {
+    background-color: white;
+}
+
+.form-box {
+    width: 50%;
+    margin: auto;
+    padding-top:20px;
+}
+
+.form-box h1 {
+    text-align: center;
+    font-weight: bold;
+    color: #f3fdff;
+}
+
+.form-box h1 span {
+    font-weight: lighter;
+}
 
 </style>
 
@@ -88,19 +107,20 @@ td:last-child {
 
   </thead>
   <tbody>
-    <tr>
-        {% for task in bucket.tasks %}
+  {% for task in bucket.tasks %}
 
+  <tr>
       <td>{{ task.description }}</td>
       <td>
         <i class="material-icons button edit">edit</i>
         <i class="material-icons button delete">delete</i>
       </td>
     </tr>
+        {% endfor %}
   </tbody>
 </table>
 
-     {% endfor %}
+
 
 <div class="container">
     <div class="row">
