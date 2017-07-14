@@ -109,16 +109,15 @@ class BucketList(object):
         self.description = description
         self.tasks = [] # store for to-do tasks
 
-    def create_task(self, title, description, due_date=None):
+    def create_task(self, description, due_date=None):
         """
         Create new task
 
-        :param title: Title of the task
         :param description: Description of task
         :param due_date: Optional due date of task
         :return: None
         """
-        task = Task(self.bucket_name, title, description, due_date)
+        task = Task(description, due_date)
         # save to bucket list
         self.tasks.append(task)
 
@@ -129,22 +128,18 @@ class BucketList(object):
 class Task(object):
     """Class for bucket list tasks"""
 
-    def __init__(self, bucket_name, title, description, due_date=None):
+    def __init__(self, description, due_date=None):
         """
         Instantiate task object
 
-        :param bucket_name: Name of bucket list that the task belongs to
-        :param title: Title of task
         :param description: Description of task
         :param due_date: optional due date
         """
-        self.bucket_name = bucket_name
-        self.title = title
         self.description = description
         self.due_date = due_date
 
     def __repr__(self):
-        return "<Task: {title} \nfrom: {bucket_name}>".format(title=self.title, bucket_name=self.bucket_name)
+        return "<Task: {description}>".format(description=self.description)
 
 class User(object):
     """Class for the app users"""
@@ -183,18 +178,19 @@ class User(object):
         else:
             return False
 
-    # def update_bucket(self, bucket_name, bu):
-    #     """
-    #     Update a bucket list
-    #
-    #     :param bucket_name: Name of bucket list to be updated
-    #     :return: True if bucket list was successfully updated, False otherwise
-    #     """
-    #     pos = None
-    #     for i, bucket in enumerate(self.buckets):
-    #         if bucket.bucket_name == bucket_name:
-    #             pos = i
-    #     if pos is not None:
+    def find_bucket(self, bucket_name):
+        """
+        Find bucket by name
+
+        :param bucket_name: Name of bucket list to be found
+        :return: BucketList if found, False otherwise
+        """
+        pos = None
+        for i, bucket in enumerate(self.buckets):
+            if bucket.bucket_name == bucket_name:
+                pos = i
+        if pos is not None:
+            return self.buckets[pos]
 
 
 
