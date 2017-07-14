@@ -38,3 +38,7 @@ class NewBucketForm(FlaskForm):
     name = StringField("What's the name of this bucket-list?", validators=[DataRequired()])
     description = TextAreaField("Can you describe this bucket?")
     submit = SubmitField('Submit')
+
+class NewTaskForm(FlaskForm):
+    description = TextAreaField("Enter new task", validators=[DataRequired()])
+    submit = SubmitField('Submit')
