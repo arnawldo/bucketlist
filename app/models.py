@@ -121,6 +121,22 @@ class BucketList(object):
         # save to bucket list
         self.tasks.append(task)
 
+    def delete_task(self, description):
+        """
+        Delete task of given description
+
+        :param description: task description
+        :return: True if successful, false otherwise
+        """
+        pos = None
+        for i, task in enumerate(self.tasks):
+            if task.description == description:
+                pos = i
+        if pos is not None:
+            del self.tasks[pos]
+            return True
+        else:
+            return False
 
     def __repr__(self):
         return "<BueckList {bucket_name} \nby: {username} >".format(name=self.bucket_name, username=self.username)

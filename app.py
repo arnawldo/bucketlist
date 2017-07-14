@@ -105,6 +105,14 @@ def delete_bucket(bucket_name):
     user.delete_bucket(bucket_name)
     return redirect(url_for('buckets'))
 
+@app.route('/delete_task/<string:bucket_name>/<string:task_description>')
+@requires_login
+def delete_task(bucket_name, task_description):
+    user = db.find_user_by_email(session["email"])
+    bucket = user.find_bucket(bucket_name)
+    bucket.delete_task(task_description)
+    return redirect(url_for('buckets', bucket_name=bucket_name))
+
 
 if __name__ == '__main__':
     app.run(debug=True)

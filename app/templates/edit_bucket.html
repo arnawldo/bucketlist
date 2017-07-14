@@ -112,8 +112,8 @@ tr {
   <tr>
       <td>{{ task.description }}</td>
       <td>
-        <i class="material-icons button edit">edit</i>
-        <i class="material-icons button delete">delete</i>
+
+        <i href="{{ url_for('delete_task', bucket_name = bucket.bucket_name, task_description=task.description)}}" class="material-icons button delete">delete</i>
       </td>
     </tr>
         {% endfor %}
